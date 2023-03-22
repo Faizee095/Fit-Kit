@@ -51,7 +51,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         mb="49px"
         textAlign="center"
       >
-        Awesome Exercises You <br /> Should Know
+        All The Exercises That <br /> You Need!
       </Typography>
       <Box position="relative" mb="72px">
         <TextField
@@ -70,7 +70,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         <Button
           className="search-btn"
           sx={{
-            bgcolor: "#FF2625",
+            bgcolor: "#0000FF",
             color: "#fff",
             textTransform: "none",
             width: { lg: "173px", xs: "80px" },

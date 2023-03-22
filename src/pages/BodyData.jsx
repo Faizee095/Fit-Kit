@@ -111,7 +111,7 @@ const BodyData = () => {
         <Button
           className="search-btn"
           sx={{
-            bgcolor: "#FF2625",
+            bgcolor: "#0000FF",
             color: "#fff",
             textTransform: "none",
             width: "180px",
