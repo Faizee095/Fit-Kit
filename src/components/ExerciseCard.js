@@ -6,7 +6,7 @@ import ExerciseImage from "./ExerciseImage";
 const ExerciseCard = ({ exercise }) => (
   <Link to={`/exercise/${exercise.id}`} className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-lime hover:shadow-xl hover:shadow-ink/10">
     <div className="relative overflow-hidden bg-[#eef0e9] p-3">
-      <ExerciseImage exercise={exercise} className="h-56 w-full rounded-2xl object-contain transition duration-500 group-hover:scale-[1.03] sm:h-60" />
+      <ExerciseImage exercise={exercise} className="h-40 w-full rounded-2xl object-contain transition duration-500 group-hover:scale-[1.03] sm:h-44" />
       <span className="absolute right-6 top-6 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-ink shadow-sm transition group-hover:bg-lime"><FiArrowUpRight size={20} /></span>
     </div>
     <div className="p-5">

@@ -10,7 +10,7 @@ const Details = ({ exerciseDetail }) => {
   ];
 
   return <section className="grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-14">
-    <div className="rounded-[2rem] bg-[#e9ecdf] p-3 sm:p-5"><ExerciseImage exercise={exerciseDetail} className="aspect-square w-full rounded-[1.5rem] object-contain" /></div>
+    <div className="mx-auto w-full max-w-[460px] rounded-[2rem] bg-[#e9ecdf] p-3 sm:p-5"><ExerciseImage exercise={exerciseDetail} className="mx-auto h-[280px] w-full rounded-[1.5rem] object-contain sm:h-[340px] lg:h-[380px]" /></div>
     <div>
       <span className="rounded-full bg-lime/50 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide text-ink">Exercise guide</span>
       <h1 className="mt-5 text-4xl font-black capitalize leading-tight tracking-tight text-ink sm:text-5xl">{exerciseDetail.name}</h1>
