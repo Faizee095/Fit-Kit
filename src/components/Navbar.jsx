@@ -5,13 +5,13 @@ import { Stack } from '@mui/material';
 import Logo from '../assets/images/NewLogo.png';
 
 const Navbar = () => (
-  <Stack direction="row" justifyContent="space-around" sx={{ gap: { sm: '123px', xs: '40px' }, mt: { sm: '32px', xs: '20px' }, justifyContent: 'none' }} px="20px">
+  <Stack className="site-header" direction="row" justifyContent="space-between" alignItems="center" px="20px">
     <Link to="/">
-      <img src={Logo} alt="logo" style={{ width: '48px', height: '48px', margin: '0px 20px' }} />
+      <img src={Logo} alt="Fit-Kit home" style={{ width: '48px', height: '48px' }} />
     </Link>
     <Stack
       direction="row"
-      gap="40px"
+      gap="clamp(14px, 3vw, 36px)"
       fontFamily="Alegreya"
       fontSize="24px"
       alignItems="flex-end"

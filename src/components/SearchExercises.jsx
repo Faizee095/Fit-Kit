@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
-import { exerciseOptions, fetchData } from "../utils/fetchData";
+import { fetchBodyParts, fetchExercises } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
 
 const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
@@ -10,36 +10,25 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      const bodyPartsData = await fetchData(
-        "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
-        exerciseOptions
-      );
-
+      const bodyPartsData = await fetchBodyParts();
       setBodyParts(["all", ...bodyPartsData]);
     };
 
-    fetchExercisesData();
+    fetchExercisesData().catch((error) => console.error("Unable to load exercise categories", error));
   }, []);
 
   const handleSearch = async () => {
     if (search) {
-      const exercisesData = await fetchData(
-        "https://exercisedb.p.rapidapi.com/exercises",
-        exerciseOptions
-      );
+      try {
+        const searchedExercises = await fetchExercises({ name: search.trim() });
 
-      const searchedExercises = exercisesData.filter(
-        (item) =>
-          item.name.toLowerCase().includes(search) ||
-          item.target.toLowerCase().includes(search) ||
-          item.equipment.toLowerCase().includes(search) ||
-          item.bodyPart.toLowerCase().includes(search)
-      );
+        window.scrollTo({ top: 1800, left: 100, behavior: "smooth" });
 
-      window.scrollTo({ top: 1800, left: 100, behavior: "smooth" });
-
-      setSearch("");
-      setExercises(searchedExercises);
+        setSearch("");
+        setExercises(searchedExercises);
+      } catch (error) {
+        console.error("Unable to search exercises", error);
+      }
     }
   };
 
@@ -53,12 +42,12 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       >
         All The Exercises That <br /> You Need!
       </Typography>
-      <Box position="relative" mb="72px">
+      <Box className="exercise-search" position="relative" mb="72px">
         <TextField
           height="76px"
           sx={{
             input: { fontWeight: "700", border: "none", borderRadius: "4px" },
-            width: { lg: "1170px", xs: "350px" },
+            width: "min(100%, 920px)",
             backgroundColor: "#fff",
             borderRadius: "40px",
           }}

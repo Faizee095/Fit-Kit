@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
-import { exerciseOptions, fetchData, youtubeOptions } from "../utils/fetchData";
+import { fetchExercise, fetchExercises, fetchData, youtubeOptions } from "../utils/fetchData";
 import Details from "../components/Details";
 import ExerciseVideos from "../components/ExerciseVideos";
 import SimilarExercises from "../components/SimilarExercises";
@@ -18,36 +18,26 @@ const ExerciseDetail = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const fetchExercisesData = async () => {
-      const exerciseDbUrl = "https://exercisedb.p.rapidapi.com";
       const youtubeSearchUrl =
         "https://youtube-search-and-download.p.rapidapi.com";
 
-      const exerciseDetailData = await fetchData(
-        `${exerciseDbUrl}/exercises/exercise/${id}`,
-        exerciseOptions
-      );
+      const exerciseDetailData = await fetchExercise(id);
       setExerciseDetail(exerciseDetailData);
 
       const exerciseVideosData = await fetchData(
-        `${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`,
+        `${youtubeSearchUrl}/search?query=${encodeURIComponent(`${exerciseDetailData.name} exercise`)}`,
         youtubeOptions
       );
-      setExerciseVideos(exerciseVideosData.contents);
+      setExerciseVideos(exerciseVideosData.contents || []);
 
-      const targetMuscleExercisesData = await fetchData(
-        `${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`,
-        exerciseOptions
-      );
+      const targetMuscleExercisesData = await fetchExercises({ target: exerciseDetailData.target });
       setTargetMuscleExercises(targetMuscleExercisesData);
 
-      const equimentExercisesData = await fetchData(
-        `${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
-        exerciseOptions
-      );
+      const equimentExercisesData = await fetchExercises({ equipment: exerciseDetailData.equipment });
       setEquipmentExercises(equimentExercisesData);
     };
 
-    fetchExercisesData();
+    fetchExercisesData().catch((error) => console.error("Unable to load exercise details", error));
   }, [id]);
 
   if (!exerciseDetail) return <div>No Data</div>;

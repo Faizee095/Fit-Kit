@@ -11,7 +11,7 @@ import Premium from "./pages/Premium";
 
 function App() {
   return (
-    <Box width="400px" sx={{ width: { xl: "1488px" } }} m="auto">
+    <Box className="app-shell" m="auto">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import { Box, Stack, Typography } from "@mui/material";
 
-import { exerciseOptions, fetchData } from "../utils/fetchData";
+import { fetchExercises } from "../utils/fetchData";
 import ExerciseCard from "./ExerciseCard";
 import Loader from "./Loader";
 
@@ -12,25 +12,15 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      let exercisesData = [];
-
-      if (bodyPart === "all") {
-        exercisesData = await fetchData(
-          "https://exercisedb.p.rapidapi.com/exercises",
-          exerciseOptions
-        );
-      } else {
-        exercisesData = await fetchData(
-          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
-          exerciseOptions
-        );
-      }
-
+      const exercisesData = await fetchExercises({ bodyPart });
       setExercises(exercisesData);
+      setCurrentPage(1);
     };
 
-    fetchExercisesData();
+    fetchExercisesData().catch((error) => console.error("Unable to load exercises", error));
   }, [bodyPart, setExercises]);
+
+  useEffect(() => setCurrentPage(1), [exercises]);
 
   // Pagination
   const indexOfLastExercise = currentPage * exercisesPerPage;
@@ -59,8 +49,9 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         Showing Results
       </Typography>
       <Stack
+        className="exercise-results-grid"
         direction="row"
-        sx={{ gap: { lg: "107px", xs: "50px" } }}
+        sx={{ gap: { lg: "32px", xs: "20px" } }}
         flexWrap="wrap"
         justifyContent="center"
       >
