@@ -192,7 +192,7 @@ const Calory = () => {
           Calculate
         </Button>
       </Stack>
-      {/* <Typography>{calory ? calory : ""}</Typography> */}
+      <Typography>{calory ? calory : ""}</Typography>
     </>
   );
 };
