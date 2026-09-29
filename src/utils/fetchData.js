@@ -1,5 +1,3 @@
-import { height } from "@mui/system";
-
 export const exerciseOptions = {
   method: "GET",
   headers: {

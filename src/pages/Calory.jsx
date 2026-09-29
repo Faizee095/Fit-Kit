@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   TextField,
@@ -8,13 +7,11 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-  FormControl,
   MenuItem,
   Select,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
-import { fetchData, getBMI } from "../utils/fetchData";
 
 const Calory = () => {
   const [age, setAge] = useState("");

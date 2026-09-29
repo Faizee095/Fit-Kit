@@ -2,7 +2,6 @@ import React from "react";
 import { Box, TextField, InputLabel, Typography, Button } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
-import { fetchData, getBMI } from "../utils/fetchData";
 
 const BodyData = () => {
   const [age, setAge] = useState("");
