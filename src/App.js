@@ -1,6 +1,4 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Box } from "@mui/material";
 import Home from "./pages/Home";
 import ExerciseDetails from "./pages/ExerciseDetails";
 import Navbar from "./components/Navbar";
@@ -11,7 +9,7 @@ import Premium from "./pages/Premium";
 
 function App() {
   return (
-    <Box className="app-shell" m="auto">
+    <div className="mx-auto min-h-screen max-w-[1440px] px-4 sm:px-6 lg:px-10">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,7 +19,7 @@ function App() {
         <Route path="/exercise/:id" element={<ExerciseDetails />} />
       </Routes>
       <Footer />
-    </Box>
+    </div>
   );
 }
 

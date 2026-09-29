@@ -1,54 +1,10 @@
 import React from "react";
-import { Typography, Box, Stack } from "@mui/material";
-
 import HorizontalScrollbar from "./HorizontalScrollbar";
-import Loader from "./Loader";
 
-const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => (
-  <Box sx={{ mt: { lg: "100px", xs: "0px" } }}>
-    <Typography
-      sx={{ fontSize: { lg: "44px", xs: "25px" }, ml: "20px" }}
-      fontWeight={700}
-      color="#000"
-      mb="33px"
-    >
-      Similar{" "}
-      <span style={{ color: "#0000FF", textTransform: "capitalize" }}>
-        Target Muscle
-      </span>{" "}
-      exercises
-    </Typography>
-    <Stack direction="row" sx={{ p: 2, position: "relative" }}>
-      {targetMuscleExercises.length !== 0 ? (
-        <HorizontalScrollbar data={targetMuscleExercises} />
-      ) : (
-        <Loader />
-      )}
-    </Stack>
-    <Typography
-      sx={{
-        fontSize: { lg: "44px", xs: "25px" },
-        ml: "20px",
-        mt: { lg: "100px", xs: "60px" },
-      }}
-      fontWeight={700}
-      color="#000"
-      mb="33px"
-    >
-      Similar{" "}
-      <span style={{ color: "#0000FF", textTransform: "capitalize" }}>
-        Equipment
-      </span>{" "}
-      exercises
-    </Typography>
-    <Stack direction="row" sx={{ p: 2, position: "relative" }}>
-      {equipmentExercises.length !== 0 ? (
-        <HorizontalScrollbar data={equipmentExercises} />
-      ) : (
-        <Loader />
-      )}
-    </Stack>
-  </Box>
+const SimilarExercises = ({ targetMuscleExercises = [], equipmentExercises = [] }) => (
+  <section className="mt-16 space-y-12 sm:mt-20" aria-label="Related exercises">
+    {[{ title: "Train the same muscle", data: targetMuscleExercises }, { title: "Use the same equipment", data: equipmentExercises }].map((group) => group.data.length > 0 && <div key={group.title}><h2 className="mb-5 text-2xl font-black text-ink sm:text-3xl">{group.title}</h2><HorizontalScrollbar data={group.data} /></div>)}
+  </section>
 );
 
 export default SimilarExercises;
